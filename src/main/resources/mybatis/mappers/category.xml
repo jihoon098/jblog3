@@ -3,22 +3,42 @@
 <mapper namespace="category">
 	
 	
-	<insert id="insert" parameterType="userVo">
+	<insert id="insertBasic" parameterType="userVo">
 		<![CDATA[
 			insert into category
 			values(null, '기타', null, now(), #{id});
 		]]>
 	</insert>
 	
+	<insert id="insert" parameterType="CategoryVo">
+		<![CDATA[
+			insert into category
+			values(null, #{name}, #{description}, now(), #{blogId});
+		]]>
+	</insert>
+	
+	
 	<select id="getList" parameterType="String" resultType="categoryVo">
 		<![CDATA[
 			select no,
 				   name,
+				   description,
 				   blog_id as blogId
 			from category
 			where blog_id = #{id};
 		]]>
 	</select> 
+	
+	
+	<select id="getAdminCategory" parameterType="String" resultType="Map">
+		<![CDATA[
+			select a.name, ifnull(count, 0) as postCount, a.description
+			from category a 
+			left join (select category_no, count(*) as count from post group by category_no) b 
+			on a.no = b.category_no 
+			where a.blog_id = #{id};
+		]]>
+	</select>
 	
 
 

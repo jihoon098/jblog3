@@ -26,7 +26,7 @@
 			      			<td>
 			      				<input type="text" size="60" name="title" value="제목을 작성해주세요.">
 				      			<select name="categoryNo">
-				      				<c:forEach items='${categoryList }' var = "category" varStatus='status'>
+				      				<c:forEach items='${categoryList }' var = 'category' varStatus='status'>
 					      				<option value="${category.no }">${category.name }</option>
 				      				</c:forEach>
 				      			</select>

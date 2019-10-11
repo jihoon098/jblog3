@@ -34,7 +34,7 @@ public class BlogDao {
 		//2,2일때 -> 2카테고리에 대한 2에 해당하는 포스트 검색.
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		//map.put("id", id);
+		map.put("id", id);
 		map.put("categoryPathNo", categoryPathNo);
 		map.put("postPathNo", postPathNo);
 		

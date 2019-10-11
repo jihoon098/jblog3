@@ -88,19 +88,35 @@ public class BlogController {
 	
 	@RequestMapping(value = "/admin/category", method=RequestMethod.GET)
 	public String adminCategory(@PathVariable String id, Model model) {
-		BlogVo vo = blogService.get(id);
-		model.addAttribute("blogVo", vo);
 		
+		BlogVo vo = blogService.get(id);
+		Map<String, Object> AdminCategory = categoryService.getAdminCategory(id);
+		
+		model.addAttribute("blogVo", vo);
+		model.addAllAttributes(AdminCategory);
 		return "blog/blog-admin-category";
 	}
+	
+	@RequestMapping(value = "/admin/category", method=RequestMethod.POST)
+	public String adminCategory(
+			@PathVariable String id, 
+			@ModelAttribute CategoryVo vo) {
+		
+		vo.setBlogId(id);
+		System.out.println(vo);
+		
+		categoryService.insert(vo);
+		return "redirect:/"+ id + "/admin/category";
+	}
+	
 	
 	@RequestMapping(value = "/admin/write", method=RequestMethod.GET)
 	public String adminWrite(@PathVariable String id, Model model) {
 		
-		BlogVo blogVo = blogService.get(id);
+		BlogVo vo = blogService.get(id);
 		List<CategoryVo> categoryList= categoryService.get(id);
 		
-		model.addAttribute("blogVo", blogVo);
+		model.addAttribute("blogVo", vo);
 		model.addAttribute("categoryList", categoryList);
 		return "blog/blog-admin-write";
 	}
@@ -113,5 +129,8 @@ public class BlogController {
 		postService.write(vo);
 		return "redirect:/"+ id;
 	}
+	
+	
+	
 	
 }

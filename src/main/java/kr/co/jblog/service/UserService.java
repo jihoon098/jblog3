@@ -29,7 +29,7 @@ public class UserService {
 		System.out.println("---blogDao.insert(vo)---");
 		blogDao.insert(vo);
 		System.out.println("---categoryDao.insert(vo)---");
-		categoryDao.insert(vo);
+		categoryDao.insertBasic(vo);
 		System.out.println("---user,blog,category생성---");
 	}
 	
