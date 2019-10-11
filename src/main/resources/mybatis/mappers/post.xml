@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+	
+	<select id="getList" parameterType="Map" resultType="postVo">
+		<![CDATA[
+			select post_no as postNo,
+				   title,
+				   reg_date as regDate,
+				   category_no as categoryNo
+			from post
+		]]>
+			<choose>
+				<when test= "categoryPathNo == 0">
+					<![CDATA[
+					where category_no = (select MIN(category_no) from category)
+					]]>
+				</when>
+				<otherwise>
+					<![CDATA[
+               		where category_no = #{categoryPathNo}
+					]]>
+				</otherwise>
+			</choose>
+		<![CDATA[
+        order by reg_date DESC;
+		]]>
+		
+	</select>
+	
+	
+	<select id="get" parameterType="Map" resultType="postVo">
+		<![CDATA[
+			select title, contents
+			from post
+			]]>
+			<choose>
+				<when test= "postPathNo == 0">
+					<choose>
+						<when test = "categoryPathNo == 0">
+							<![CDATA[
+							where category_no = (select MIN(category_no) from category)
+							]]>
+						</when>
+						<otherwise>
+							<![CDATA[
+							where category_no = #{categoryPathNo}
+							]]>
+						</otherwise>			
+					</choose>
+					<![CDATA[
+					order by reg_date DESC
+					limit 1;
+					]]>
+				</when>
+				<otherwise>
+					<![CDATA[
+               		where post_no = #{postPathNo};
+					]]>
+				</otherwise>
+			</choose>
+	</select>
+	
+</mapper>

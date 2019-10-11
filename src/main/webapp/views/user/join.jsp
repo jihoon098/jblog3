@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!doctype html>
 <html>
 <head>
@@ -11,10 +11,14 @@
 </head>
 <body>
 	<div class="center-content">
-		
-		<c:import url="/WEB-INF/views/include/header.jsp"/>
-		
-		<form class="join-form" id="join-form" method="post" action="${pageContext.request.contextPath}/user/joinsuccess">
+		<h1 class="logo">JBlog</h1>
+		<ul class="menu">
+			<li><a href="">로그인</a></li>
+			<li><a href="">회원가입</a></li>
+			<li><a href="">로그아웃</a></li>
+			<li><a href="">내블로그</a></li>
+		</ul>
+		<form class="join-form" id="join-form" method="post" action="">
 			<label class="block-label" for="name">이름</label>
 			<input id="name"name="name" type="text" value="">
 			
@@ -33,6 +37,7 @@
 			</fieldset>
 
 			<input type="submit" value="가입하기">
+
 		</form>
 	</div>
 </body>
