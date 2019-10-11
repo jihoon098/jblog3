@@ -1,15 +1,19 @@
 package kr.co.jblog.repository;
 
-import java.util.List;
-import java.util.Optional;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import kr.co.jblog.vo.PostVo;
 
+@Repository
 public class PostDao {
 
-	public List<PostVo> get(Optional<Long> categoryPathNo) {
-		// TODO Auto-generated method stub
-		return null;
+	@Autowired
+	private SqlSession sqlSession;
+	
+	public void write(PostVo vo) {
+		sqlSession.insert("post.write", vo);
 	}
 
 }

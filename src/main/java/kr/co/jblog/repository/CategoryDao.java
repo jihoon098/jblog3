@@ -20,8 +20,8 @@ public class CategoryDao {
 		sqlSession.insert("category.insert", vo);
 	}
 
-	public List<CategoryVo> get() {
-		List<CategoryVo> result = sqlSession.selectList("category.get");
+	public List<CategoryVo> get(String id) {
+		List<CategoryVo> result = sqlSession.selectList("category.getList", id);
 		return result;
 	}
 

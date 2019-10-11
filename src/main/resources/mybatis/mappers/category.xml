@@ -10,12 +10,13 @@
 		]]>
 	</insert>
 	
-	<select id="getList" resultType="categoryVo">
+	<select id="getList" parameterType="String" resultType="categoryVo">
 		<![CDATA[
 			select no,
 				   name,
 				   blog_id as blogId
 			from category
+			where blog_id = #{id};
 		]]>
 	</select> 
 	

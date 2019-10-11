@@ -61,4 +61,13 @@
 			</choose>
 	</select>
 	
+	
+	<insert id="write" parameterType="PostVo">
+		<![CDATA[
+			insert into post
+			values(null, #{title}, #{contents}, now(), #{categoryNo});
+		]]>
+	</insert>
+	
+	
 </mapper>

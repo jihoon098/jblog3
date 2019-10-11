@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.jblog.vo.BlogVo;
-import kr.co.jblog.vo.PostVo;
 import kr.co.jblog.vo.UserVo;
 
 @Repository
@@ -41,17 +40,13 @@ public class BlogDao {
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("blogVo", sqlSession.selectOne("blog.get", id));//blog를 가져옴
-		result.put("categoryList", sqlSession.selectList("category.getList"));//categoryList를 가져옴
+		result.put("categoryList", sqlSession.selectList("category.getList", id));//categoryList를 가져옴
 		result.put("postList", sqlSession.selectList("post.getList", map));//postList를 가져옴
 		result.put("postVo", sqlSession.selectOne("post.get", map));//post가져옴
 		
 		//System.out.println((BlogVo)result.get("blogVo"));
 		//System.out.println((PostVo)result.get("postVo"));
-		
 		return result;
 	}
-	
-	
-	
 	
 }

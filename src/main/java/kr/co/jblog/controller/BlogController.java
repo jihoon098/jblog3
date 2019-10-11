@@ -1,11 +1,13 @@
 package kr.co.jblog.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.jblog.service.BlogService;
+import kr.co.jblog.service.CategoryService;
 import kr.co.jblog.service.FileuploadService;
+import kr.co.jblog.service.PostService;
 import kr.co.jblog.vo.BlogVo;
+import kr.co.jblog.vo.CategoryVo;
+import kr.co.jblog.vo.PostVo;
 
 
 @Controller
@@ -23,7 +29,10 @@ public class BlogController {
 
 	@Autowired
 	private BlogService blogService;
-	
+	@Autowired
+	private CategoryService categoryService;
+	@Autowired
+	private PostService postService;
 	@Autowired
 	private FileuploadService fileuploadService;
 	
@@ -87,10 +96,22 @@ public class BlogController {
 	
 	@RequestMapping(value = "/admin/write", method=RequestMethod.GET)
 	public String adminWrite(@PathVariable String id, Model model) {
-		BlogVo vo = blogService.get(id);
-		model.addAttribute("blogVo", vo);
 		
+		BlogVo blogVo = blogService.get(id);
+		List<CategoryVo> categoryList= categoryService.get(id);
+		
+		model.addAttribute("blogVo", blogVo);
+		model.addAttribute("categoryList", categoryList);
 		return "blog/blog-admin-write";
+	}
+	
+	@RequestMapping(value = "/admin/write", method=RequestMethod.POST)
+	public String adminWrite(
+			@PathVariable String id,
+			@ModelAttribute PostVo vo) {
+
+		postService.write(vo);
+		return "redirect:/"+ id;
 	}
 	
 }

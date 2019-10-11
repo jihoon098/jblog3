@@ -14,8 +14,8 @@ public class CategoryService {
 	@Autowired
 	private CategoryDao categoryDao;
 	
-	public List<CategoryVo> get() {
-		return categoryDao.get();
+	public List<CategoryVo> get(String id) {
+		return categoryDao.get(id);
 	}
 
 }
