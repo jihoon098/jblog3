@@ -38,7 +38,13 @@ public class CategoryDao {
 	}
 
 	public void delete(CategoryVo vo) {
-		sqlSession.insert("category.delete", vo);
+		sqlSession.delete("category.delete", vo);
+	}
+
+	public Map<String, Object> getNewCategory(CategoryVo vo) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("NewCategory", sqlSession.selectOne("category.getNewCategory", vo));
+		return result;
 	}
 
 }

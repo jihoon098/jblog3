@@ -15,16 +15,16 @@
 		<c:import url="/WEB-INF/views/include/header.jsp"/>
 		
 		<form class="join-form" id="join-form" method="post" action="${pageContext.request.contextPath}/user/joinsuccess">
-			<label class="block-label" for="name">이름</label>
-			<input id="name"name="name" type="text" value="">
+			<label class="block-label" for="name" >이름</label>
+			<input id="name"name="name" type="text" value="" required="required">
 			
 			<label class="block-label" for="blog-id">아이디</label>
-			<input id="blog-id" name="id" type="text"> 
+			<input id="blog-id" name="id" type="text" required="required"> 
 			<input id="btn-checkemail" type="button" value="id 중복체크">
 			<img id="img-checkemail" style="display: none;" src="${pageContext.request.contextPath}/assets/images/check.png">
 
 			<label class="block-label" for="password">패스워드</label>
-			<input id="password" name="password" type="password" />
+			<input id="password" name="password" type="password" required="required"/>
 
 			<fieldset>
 				<legend>약관동의</legend>

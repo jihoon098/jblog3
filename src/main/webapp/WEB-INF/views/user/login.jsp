@@ -16,8 +16,8 @@
 		<c:import url="/WEB-INF/views/include/header.jsp"/>
 		
 		<form class="login-form" action="${pageContext.servletContext.contextPath}/user/auth" method="post">
-      		<label>아이디</label> <input type="text" name="id">
-      		<label>패스워드</label> <input type="text" name="password">
+      		<label>아이디</label> <input type="text" name="id" required="required">
+      		<label>패스워드</label> <input type="text" name="password" required="required">
       		<input type="submit" value="로그인">
 		</form>
 	</div>

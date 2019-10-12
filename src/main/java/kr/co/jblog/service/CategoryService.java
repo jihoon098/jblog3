@@ -35,5 +35,10 @@ public class CategoryService {
 		categoryDao.delete(vo);
 	}
 
+	public Map<String, Object> insertAndgetNewCategory(CategoryVo vo) {
+		categoryDao.insert(vo);
+		return categoryDao.getNewCategory(vo);
+	}
+
 
 }

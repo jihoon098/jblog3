@@ -1,5 +1,6 @@
 package kr.co.jblog.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -100,29 +101,45 @@ public class BlogController {
 		model.addAllAttributes(AdminCategory);
 		return "blog/blog-admin-category";
 	}
+
+///admin/category/write 서버 통신 방법
+//	@Auth
+//	@RequestMapping(value = "/admin/category/write", method=RequestMethod.POST)
+//	public String adminCategory(
+//			@PathVariable String id, 
+//			@ModelAttribute CategoryVo vo) {
+//		
+//		vo.setBlogId(id);
+//		System.out.println(vo);
+//		
+//		categoryService.insert(vo);
+//		return "redirect:/"+ id + "/admin/category";
+//	}
 	
 	@Auth
+	@ResponseBody
 	@RequestMapping(value = "/admin/category/write", method=RequestMethod.POST)
-	public String adminCategory(
-			@PathVariable String id, 
+	public Map<String, Object> categoryCreate(
+			@PathVariable String id,
 			@ModelAttribute CategoryVo vo) {
 		
 		vo.setBlogId(id);
-		System.out.println(vo);
-		
-		categoryService.insert(vo);
-		return "redirect:/"+ id + "/admin/category";
+		Map<String, Object> newCategory = categoryService.insertAndgetNewCategory(vo);
+		//System.out.println(newCategory.get("NewCategory"));
+		return newCategory;
 	}
+	
 	
 	@Auth
 	@ResponseBody
 	@RequestMapping(value = "/admin/category/delete", method=RequestMethod.POST)
-	public String categoryDelete(@ModelAttribute CategoryVo vo) {
-		System.out.println(vo);
-		//System.out.println("id: " + id + ", no: " + vo.getNo());
+	public Map<String, String> categoryDelete(@ModelAttribute CategoryVo vo) {
+		
 		categoryService.delete(vo);
 		
-		return "true";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("success", "success");
+		return map;
 	}
 	
 	
