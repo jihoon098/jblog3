@@ -32,13 +32,22 @@
 	
 	<select id="getAdminCategory" parameterType="String" resultType="Map">
 		<![CDATA[
-			select a.name, ifnull(count, 0) as postCount, a.description
+			select a.name, a.no, ifnull(count, 0) as postCount, a.description
 			from category a 
 			left join (select category_no, count(*) as count from post group by category_no) b 
 			on a.no = b.category_no 
 			where a.blog_id = #{id};
 		]]>
 	</select>
+	
+	
+	<delete id="delete" parameterType="categoryVo">
+		<![CDATA[
+			delete from category
+			where no = #{no}
+		]]>
+	</delete>
+	
 	
 
 

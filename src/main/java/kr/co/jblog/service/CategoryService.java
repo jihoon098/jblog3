@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.jblog.repository.CategoryDao;
+import kr.co.jblog.repository.PostDao;
 import kr.co.jblog.vo.CategoryVo;
 
 @Service
@@ -14,6 +15,8 @@ public class CategoryService {
 	
 	@Autowired
 	private CategoryDao categoryDao;
+	@Autowired
+	private PostDao postDao;
 	
 	public List<CategoryVo> get(String id) {
 		return categoryDao.get(id);
@@ -25,6 +28,11 @@ public class CategoryService {
 
 	public void insert(CategoryVo vo) {
 		categoryDao.insert(vo);
+	}
+
+	public void delete(CategoryVo vo) {
+		postDao.setCategoryToBasic(vo);
+		categoryDao.delete(vo);
 	}
 
 

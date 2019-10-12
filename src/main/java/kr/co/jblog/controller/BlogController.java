@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.jblog.security.Auth;
@@ -101,7 +102,7 @@ public class BlogController {
 	}
 	
 	@Auth
-	@RequestMapping(value = "/admin/category", method=RequestMethod.POST)
+	@RequestMapping(value = "/admin/category/write", method=RequestMethod.POST)
 	public String adminCategory(
 			@PathVariable String id, 
 			@ModelAttribute CategoryVo vo) {
@@ -112,6 +113,18 @@ public class BlogController {
 		categoryService.insert(vo);
 		return "redirect:/"+ id + "/admin/category";
 	}
+	
+	@Auth
+	@ResponseBody
+	@RequestMapping(value = "/admin/category/delete", method=RequestMethod.POST)
+	public String categoryDelete(@ModelAttribute CategoryVo vo) {
+		System.out.println(vo);
+		//System.out.println("id: " + id + ", no: " + vo.getNo());
+		categoryService.delete(vo);
+		
+		return "true";
+	}
+	
 	
 	@Auth
 	@RequestMapping(value = "/admin/write", method=RequestMethod.GET)

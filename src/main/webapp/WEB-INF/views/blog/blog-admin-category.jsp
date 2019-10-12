@@ -8,6 +8,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<script src="${pageContext.servletContext.contextPath }/assets/js/jquery/jquery-1.9.0.js" type="text/javascript"></script>
+<script>
+$(function(){
+	$(document).on("click", ".admin-cat img", function(){		
+		var clickObj = $(this);
+		var no = clickObj.attr("id");
+		var name = clickObj.attr("name");
+		
+		// ajax 통신
+		$.ajax({
+			url: "${pageContext.servletContext.contextPath }/${authUser.id }/admin/category/delete",
+			type: "POST",
+			dataType: "json",
+			data: {
+				"no" : no,
+				"blogId" : "${authUser.id }"
+			},
+			success: function(response){
+				if(response == "true") {
+					alert(name + "카테고리를 삭제했습니다.");
+					clickObj.parent().parent().remove();
+				}
+			},
+			error: function(error){
+				console.error("error:" + error);
+			}
+		});
+		
+	});
+});
+</script>
+
 </head>
 <body>
 	<div id="container">
@@ -32,13 +64,15 @@
 						<td>${category.name }</td>
 						<td>${category.postCount }</td>
 						<td>${category.description }</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+						<td>
+							<img src="${pageContext.request.contextPath}/assets/images/delete.jpg" name="${category.name }" id="${category.no }"/>
+						</td>
 						</tr>
 		      		</c:forEach>
 				</table>
 				
       			<h4 class="n-c">새로운 카테고리 추가</h4>
-		      		<form action="${pageContext.request.contextPath }/${blogVo.id }/admin/category" method="post">
+		      		<form action="${pageContext.request.contextPath }/${blogVo.id }/admin/category/write" method="post">
 				      	<table id="admin-cat-add">
 							<tr>
 								<td class="t">카테고리명</td>

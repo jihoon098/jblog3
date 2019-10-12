@@ -56,7 +56,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if(pathVariable.get("id").equals(vo.getId())) {
 			return true;
 		}else {
-			response.sendRedirect(request.getContextPath() + pathVariable);
+			response.sendRedirect(request.getContextPath() + "/" + pathVariable.get("id"));
 		}
 		
 		return false;
