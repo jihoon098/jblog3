@@ -17,7 +17,7 @@
 	</context-param>
   
   
-  	<!--모든요청에 대한 UTF-8 인코딩을 해주는 기능인가?ㅇ??? 나중에 확인하자  -->
+  	<!--모든요청에 대한 UTF-8 인코딩 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

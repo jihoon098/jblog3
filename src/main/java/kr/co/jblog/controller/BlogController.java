@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.jblog.security.Auth;
 import kr.co.jblog.service.BlogService;
 import kr.co.jblog.service.CategoryService;
 import kr.co.jblog.service.FileuploadService;
@@ -60,7 +61,7 @@ public class BlogController {
 		return "blog/blog-main";
 	}
 	
-
+	@Auth
 	@RequestMapping(value = "/admin/basic", method=RequestMethod.GET)
 	public String adminBasic(@PathVariable String id, Model model) {
 		
@@ -71,6 +72,7 @@ public class BlogController {
 		return "blog/blog-admin-basic";
 	}
 	
+	@Auth
 	@RequestMapping(value = "/admin/basic", method=RequestMethod.POST)
 	public String adminBasic(
 			@PathVariable String id, 
@@ -86,6 +88,7 @@ public class BlogController {
 		return "redirect:/"+ id + "/admin/basic";
 	}
 	
+	@Auth
 	@RequestMapping(value = "/admin/category", method=RequestMethod.GET)
 	public String adminCategory(@PathVariable String id, Model model) {
 		
@@ -97,6 +100,7 @@ public class BlogController {
 		return "blog/blog-admin-category";
 	}
 	
+	@Auth
 	@RequestMapping(value = "/admin/category", method=RequestMethod.POST)
 	public String adminCategory(
 			@PathVariable String id, 
@@ -109,7 +113,7 @@ public class BlogController {
 		return "redirect:/"+ id + "/admin/category";
 	}
 	
-	
+	@Auth
 	@RequestMapping(value = "/admin/write", method=RequestMethod.GET)
 	public String adminWrite(@PathVariable String id, Model model) {
 		
@@ -121,6 +125,7 @@ public class BlogController {
 		return "blog/blog-admin-write";
 	}
 	
+	@Auth
 	@RequestMapping(value = "/admin/write", method=RequestMethod.POST)
 	public String adminWrite(
 			@PathVariable String id,
