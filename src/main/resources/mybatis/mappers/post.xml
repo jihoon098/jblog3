@@ -74,6 +74,16 @@
 		]]>
 	</insert>
 	
+	<select id="checkExist" parameterType="categoryVo" resultType="Map">
+		<![CDATA[
+			select count(*) as count
+			from post a, category b
+			where a.category_no = b.no
+			and no = #{no};
+		]]>
+	</select>
+	
+	
 	<update id="updateCategoryNo" parameterType="categoryVo">
 		<![CDATA[
 			update post

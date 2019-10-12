@@ -11,6 +11,9 @@
 <script src="${pageContext.servletContext.contextPath }/assets/js/jquery/jquery-1.9.0.js" type="text/javascript"></script>
 <script>
 $(function(){
+
+	var cellnum = "${fn:length(AdminCategoryList)}";
+	
 	$(document).on("click", ".admin-cat img", function(){
 		var clickObj = $(this);
 		var no = clickObj.attr("id");
@@ -29,6 +32,13 @@ $(function(){
 				if(response.success == "success") {
 					alert("<" + name + "> " + "카테고리를 삭제했습니다.");
 					clickObj.parent().parent().remove();
+					
+					cellnum--;
+					for(b=1; b <=cellnum; b++) {
+						$("table.admin-cat tr:eq("+b+") td:eq(0)").html(b);
+						console.log(b);
+					}
+					
 				}
 			},
 			error: function(error){
@@ -66,9 +76,10 @@ $(function(){
 		});	
 	});
 	function createCategoryTable(response) {
+			cellnum++;
 		  $(".admin-cat-body").append(
 			   	"<tr>" +
-		        "<td>" + "${fn:length(AdminCategoryList) + 1 }" + "</td>" +
+		        "<td>" + cellnum + "</td>" +
 		        "<td>" + response.name + "</td>" +
 		        "<td>" + response.postCount + "</td>"+
 		        "<td>" + response.description + "</td>" +
@@ -78,6 +89,7 @@ $(function(){
 		        "</td>" +
 		        "</tr>");
 		  }	
+
 });
 </script>
 

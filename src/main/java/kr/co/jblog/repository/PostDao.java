@@ -1,5 +1,8 @@
 package kr.co.jblog.repository;
 
+
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,6 +22,11 @@ public class PostDao {
 
 	public void setCategoryToBasic(CategoryVo vo) {
 		sqlSession.insert("post.updateCategoryNo", vo);
+	}
+
+	public Map<String, Object> checkExist(CategoryVo vo) {
+		Map<String, Object> result = sqlSession.selectOne("post.checkExist", vo);
+		return result;
 	}
 
 }

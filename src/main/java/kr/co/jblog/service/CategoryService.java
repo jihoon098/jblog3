@@ -31,7 +31,12 @@ public class CategoryService {
 	}
 
 	public void delete(CategoryVo vo) {
-		postDao.setCategoryToBasic(vo);
+		
+		Long a = (Long)postDao.checkExist(vo).get("count");
+		if(a != 0) {
+			//카테고리 no에 해당하는 post가 있다면
+			postDao.setCategoryToBasic(vo);			
+		}
 		categoryDao.delete(vo);
 	}
 
