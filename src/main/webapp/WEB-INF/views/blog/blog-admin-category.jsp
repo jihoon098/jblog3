@@ -73,7 +73,7 @@ $(function(){
 		        "<td>" + response.postCount + "</td>"+
 		        "<td>" + response.description + "</td>" +
 		        "<td>" +
-		        "<img src='${pageContext.servletContext.contextPath}/assets/images/delete.jpg' name='" + response.name + 
+		        "<img src='${pageContext.servletContext.contextPath}/assets/images/delete.jpg' + name='" + response.name + 
 			    "' id='" + response.no + "'>" +	
 		        "</td>" +
 		        "</tr>");

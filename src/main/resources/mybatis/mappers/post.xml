@@ -60,7 +60,7 @@
 				</when>
 				<otherwise>
 					<![CDATA[
-               		where post_no = #{postPathNo};
+               		and post_no = #{postPathNo};
 					]]>
 				</otherwise>
 			</choose>
